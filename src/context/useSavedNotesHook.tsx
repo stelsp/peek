@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { INote } from "./types";
 
 const useSavedNotesHook = () => {
-  const [note, setNote] = useState<INote>(() => {
+  const [notes, setNotes] = useState<INote[]>(() => {
     const savedNotes = localStorage.getItem("notes");
     if (savedNotes) {
       return JSON.parse(savedNotes);
@@ -12,10 +12,10 @@ const useSavedNotesHook = () => {
   });
 
   useEffect(() => {
-    localStorage.setItem("todos", JSON.stringify(note));
-  }, [note]);
+    localStorage.setItem("notes", JSON.stringify(notes));
+  }, [notes]);
 
-  return { note, setNote };
+  return { notes, setNotes };
 };
 
 export default useSavedNotesHook;

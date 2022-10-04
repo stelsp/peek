@@ -1,14 +1,18 @@
-import { Dispatch, SetStateAction } from "react";
-
 export interface INote {
-  id: number;
-  title: string;
+  id: string;
+  label: string;
   body: string;
+  status: boolean;
 }
 
 export interface IData {
-  note: INote | null;
-  setNote: Dispatch<SetStateAction<INote>>;
+  notes: INote[];
+  addNote: (title: string, body: string) => void;
+  deleteNote: (id: string) => void;
+  changeNoteLabel: (label: string, id: string) => null | undefined;
+  changeNoteBody: (body: string, id: string) => null | undefined;
+  changeNoteStatus: (status: boolean, id: string) => null | undefined;
+  clearAllNotes: () => void;
 }
 
 export interface IDataProvider {

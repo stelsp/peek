@@ -3,12 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import IconButton from "@mui/material/IconButton";
-import MenuIcon from "@mui/icons-material/Menu";
-import AccountCircle from "@mui/icons-material/AccountCircle";
-
+import SettingsIcon from "@mui/icons-material/Settings";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import SearchBar from "../SearchBar";
+import MenuIcon from "@mui/icons-material/Menu";
+import TaskIcon from "@mui/icons-material/Task";
 
 interface HeaderProps {
   setSideBarOpen: Dispatch<SetStateAction<boolean>>;
@@ -30,19 +30,20 @@ const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
   };
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" color="transparent">
       <Toolbar>
         <IconButton
           size="large"
           edge="start"
           color="inherit"
           aria-label="menu"
-          sx={{ mr: 2 }}
+          sx={{ mr: 1 }}
           onClick={handleSideBarOpen}
         >
           <MenuIcon />
         </IconButton>
-        <Typography variant="h6" component="div" sx={{ mr: 8 }}>
+        <TaskIcon sx={{ fontSize: 50, mr: 1 }} color="warning" />
+        <Typography variant="h5" fontWeight={500} component="div">
           Peek
         </Typography>
         <SearchBar />
@@ -55,7 +56,7 @@ const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
             onClick={handleMenu}
             color="inherit"
           >
-            <AccountCircle />
+            <SettingsIcon />
           </IconButton>
           <Menu
             id="menu-appbar"
@@ -72,7 +73,7 @@ const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            {/* <MenuItem onClick={handleClose}>Настройки</MenuItem> */}
+            <MenuItem onClick={handleClose}>Настройки</MenuItem>
             <MenuItem onClick={handleClose}>Сменить тему</MenuItem>
           </Menu>
         </div>
