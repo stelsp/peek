@@ -4,14 +4,51 @@ import ClickAwayListener from "@mui/material/ClickAwayListener";
 import { INote } from "../../context/types";
 
 const Item: FC<INote> = ({ status, id, label, body }) => {
-  const { deleteNote } = useData()!;
+  const { deleteNote, changeNoteLabel, changeNoteBody, changeNoteStatus } =
+    useData()!;
 
   return (
     <div style={{ width: "max-content" }}>
-      <input placeholder="title" type="text" value={label} />
-      <input placeholder="body" type="text" value={body} />
+      {label === "" && body === "" ? (
+        <>
+          <input
+            placeholder="пустая заметка"
+            type="text"
+            value={label}
+            onChange={(e) => changeNoteLabel(e.target.value, id)}
+          />
+          <input
+            placeholder="пустая заметка"
+            type="text"
+            value={body}
+            onChange={(e) => changeNoteBody(e.target.value, id)}
+          />
+        </>
+      ) : (
+        <>
+          <input
+            placeholder="title"
+            type="text"
+            value={label}
+            onChange={(e) => changeNoteLabel(e.target.value, id)}
+          />
+          <input
+            placeholder="body"
+            type="text"
+            value={body}
+            onChange={(e) => changeNoteBody(e.target.value, id)}
+          />
+        </>
+      )}
       <button type="button" onClick={() => deleteNote(id)}>
         delete
+      </button>
+      <button
+        type="button"
+        onClick={() => changeNoteStatus(!status, id)}
+        style={status ? { background: "green" } : { background: "red" }}
+      >
+        toggle
       </button>
     </div>
   );
@@ -34,7 +71,6 @@ const Workspace: FC = () => {
       <button onClick={clearAllNotes}>clear all</button>
       <ClickAwayListener onClickAway={handleClickAway}>
         <form
-          style={{ border: "1px solid black" }} // УДАЛИТЬ
           onSubmit={(e) => {
             e.preventDefault();
             if (note.label === "" && note.body === "") return null;
@@ -54,12 +90,11 @@ const Workspace: FC = () => {
             type="text"
             value={note.body}
             onChange={(e) => setNote({ ...note, body: e.target.value })}
-            style={{ marginBottom: "20px" }} // УДАЛИТЬ
           />
           {notes.length > 0 ? (
             notes.map((item, index) => <Item key={index} {...item} />)
           ) : (
-            <p>нету</p>
+            <p>нет заметок</p>
           )}
           <input type="submit" />
         </form>

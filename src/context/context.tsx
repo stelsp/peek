@@ -1,5 +1,5 @@
-import React, { createContext, FC, useContext, useState } from "react";
-import { IData, IDataProvider, INote } from "./types";
+import React, { createContext, FC, useContext } from "react";
+import { IData, IDataProvider } from "./types";
 import useSavedNotesHook from "./useSavedNotesHook";
 
 const Data = createContext<IData | null>(null);
