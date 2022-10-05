@@ -9,12 +9,15 @@ import Menu from "@mui/material/Menu";
 import SearchBar from "../SearchBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
+import { useData } from "../../context/context";
 
 interface HeaderProps {
   setSideBarOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
+  const { clearAllNotes } = useData()!;
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
@@ -73,7 +76,7 @@ const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
             open={Boolean(anchorEl)}
             onClose={handleClose}
           >
-            <MenuItem onClick={handleClose}>Настройки</MenuItem>
+            <MenuItem onClick={clearAllNotes}>Удалить все заметки</MenuItem>
             <MenuItem onClick={handleClose}>Сменить тему</MenuItem>
           </Menu>
         </div>
