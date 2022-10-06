@@ -13,7 +13,7 @@ const DataProvider: FC<IDataProvider> = ({ children }) => {
 
   const addNote = (label: string, body: string) => {
     const newNote = { label, body, status: false, id: String(Date.now()) };
-    const newNotes = [...notes, newNote];
+    const newNotes = [newNote, ...notes];
     setNotes(newNotes);
   };
 

@@ -6,6 +6,7 @@ import IconButton from "@mui/material/IconButton";
 import SettingsIcon from "@mui/icons-material/Settings";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
+import Box from "@mui/material/Box";
 import SearchBar from "../SearchBar";
 import MenuIcon from "@mui/icons-material/Menu";
 import TaskIcon from "@mui/icons-material/Task";
@@ -50,19 +51,11 @@ const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
           Peek
         </Typography>
         <SearchBar />
-        <div style={{ marginLeft: "auto" }}>
-          <IconButton
-            size="large"
-            aria-label="account of current user"
-            aria-controls="menu-appbar"
-            aria-haspopup="true"
-            onClick={handleMenu}
-            color="inherit"
-          >
+        <Box sx={{ ml: "auto" }}>
+          <IconButton size="large" onClick={handleMenu} color="inherit">
             <SettingsIcon />
           </IconButton>
           <Menu
-            id="menu-appbar"
             anchorEl={anchorEl}
             anchorOrigin={{
               vertical: "top",
@@ -79,7 +72,7 @@ const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
             <MenuItem onClick={clearAllNotes}>Удалить все заметки</MenuItem>
             <MenuItem onClick={handleClose}>Сменить тему</MenuItem>
           </Menu>
-        </div>
+        </Box>
       </Toolbar>
     </AppBar>
   );
