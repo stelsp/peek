@@ -19,7 +19,7 @@ const Form: FC = () => {
     <ClickAwayListener onClickAway={handleClickAway}>
       <Box
         component="form"
-        sx={{ width: 600, marginInline: "auto" }}
+        sx={{ marginInline: "auto" }}
         onSubmit={(e) => {
           e.preventDefault();
           if (note.label === "" && note.body === "") {
@@ -35,6 +35,8 @@ const Form: FC = () => {
         <Paper
           elevation={3}
           sx={{
+            width: "min(600px, 100%)",
+            marginInline: "auto",
             mt: 4,
             p: 2,
             br: 4,

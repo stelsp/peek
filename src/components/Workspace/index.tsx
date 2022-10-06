@@ -61,7 +61,7 @@ const IconBar: FC<IconBarProps> = ({ status, id }) => {
   );
 };
 
-const List: FC<INote> = ({ status, id, label, body }) => {
+const Item: FC<INote> = ({ status, id, label, body }) => {
   const { changeNoteLabel, changeNoteBody } = useData()!;
 
   const handleLabelChange = (
@@ -75,11 +75,16 @@ const List: FC<INote> = ({ status, id, label, body }) => {
   ) => changeNoteBody(e.target.value, id);
 
   return (
-    <Grid item>
+    <Grid
+      item
+      sx={{
+        width: "min(600px, 100%)",
+        mt: 2,
+      }}
+    >
       <Paper
         elevation={3}
         sx={{
-          width: 600,
           p: 2,
           br: 4,
           display: "flex",
@@ -110,9 +115,9 @@ const List: FC<INote> = ({ status, id, label, body }) => {
 export const Workspace: FC = () => {
   const { notes } = useData()!;
   return (
-    <Grid container spacing={2} sx={{ pt: 4, justifyContent: "center" }}>
+    <Grid container sx={{ pt: 4, justifyContent: "center" }}>
       {notes.length > 0 ? (
-        notes.map((item, index) => <List key={index} {...item} />)
+        notes.map((item, index) => <Item key={index} {...item} />)
       ) : (
         <Box
           sx={{

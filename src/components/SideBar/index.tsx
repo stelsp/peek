@@ -7,6 +7,8 @@ import {
   ListItemText,
 } from "@mui/material";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
+import LightbulbOutlinedIcon from "@mui/icons-material/LightbulbOutlined";
+import ArchiveIcon from "@mui/icons-material/Archive";
 
 interface SideBarProps {
   sideBarOpen: boolean;
@@ -19,33 +21,21 @@ const SideBar: FC<SideBarProps> = ({ sideBarOpen, closeSideBar }) => {
       <List>
         <ListItem>
           <ListItemIcon>
-            <DeleteForeverIcon />
+            <LightbulbOutlinedIcon />
           </ListItemIcon>
-          <ListItemText>Сайд-бар</ListItemText>
+          <ListItemText>Заметки</ListItemText>
+        </ListItem>
+        <ListItem>
+          <ListItemIcon>
+            <ArchiveIcon />
+          </ListItemIcon>
+          <ListItemText>Архив</ListItemText>
         </ListItem>
         <ListItem>
           <ListItemIcon>
             <DeleteForeverIcon />
           </ListItemIcon>
-          <ListItemText>Сайд-бар</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <DeleteForeverIcon />
-          </ListItemIcon>
-          <ListItemText>Сайд-бар</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <DeleteForeverIcon />
-          </ListItemIcon>
-          <ListItemText>Сайд-бар</ListItemText>
-        </ListItem>
-        <ListItem>
-          <ListItemIcon>
-            <DeleteForeverIcon />
-          </ListItemIcon>
-          <ListItemText>Сайд-бар</ListItemText>
+          <ListItemText>Удаленные</ListItemText>
         </ListItem>
       </List>
     </Drawer>
