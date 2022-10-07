@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { FC, useState } from "react";
+import Form from "./components/Form";
+import Header from "./components/Header";
+import SideBar from "./components/SideBar";
+import { Container } from "@mui/material";
+import { Workspace } from "./components/Workspace";
 
-function App() {
+const App: FC = () => {
+  const [sideBarOpen, setSideBarOpen] = useState(false);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Header setSideBarOpen={setSideBarOpen} />
+      <Container>
+        <Form />
+        <Workspace />
+      </Container>
+      <SideBar
+        sideBarOpen={sideBarOpen}
+        closeSideBar={() => setSideBarOpen(false)}
+      />
+    </>
   );
-}
+};
 
 export default App;
