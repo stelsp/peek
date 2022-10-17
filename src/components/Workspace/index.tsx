@@ -34,8 +34,14 @@ const IconBar: FC<IconBarProps> = ({ status, id }) => {
   };
   return (
     <Box sx={{ ml: "auto" }}>
-      <IconButton size="large" onClick={handleMenu}>
-        <ListIcon onClick={() => changeNoteStatus(!status, id)} />
+      <IconButton
+        size="large"
+        onClick={(e) => {
+          handleMenu(e);
+          changeNoteStatus(!status, id);
+        }}
+      >
+        <ListIcon />
       </IconButton>
       <Menu
         anchorEl={anchorEl}
