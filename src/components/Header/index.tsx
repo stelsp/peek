@@ -47,7 +47,7 @@ const Header: FC<HeaderProps> = ({ setSideBarOpen }) => {
           <MenuIcon />
         </IconButton>
         <TaskIcon sx={{ fontSize: 50, mr: 1 }} color="warning" />
-        <Typography variant="h5" fontWeight={500} component="div">
+        <Typography variant="h5" component="div">
           Peek
         </Typography>
         <SearchBar />
