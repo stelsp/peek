@@ -1,5 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
-import React from "react";
+import React, { useMemo } from "react";
 import { Container } from "react-bootstrap";
 import { Routes, Route, Navigate } from "react-router-dom";
 import NewNote from "./components/NewNote";
@@ -11,7 +11,7 @@ type Note = {
 
 export type RawNote = {
   id: string;
-};
+} & RawNoteData;
 
 export type RawNoteData = {
   title: string;
@@ -33,6 +33,15 @@ export type Tag = {
 const App = () => {
   const [notes, setNotes] = useLocalStorage<RawNote[]>("NOTES", []);
   const [tags, setTags] = useLocalStorage<Tag[]>("TAGS", []);
+
+  const notesWithTags = useMemo(
+    () =>
+      notes.map((note) => ({
+        ...note,
+        tags: tags.filter((tag) => note.tagsIDs.includes(tag.id)),
+      })),
+    [notes, tags]
+  );
 
   return (
     <Container className="my-4">
