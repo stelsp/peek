@@ -1,17 +1,21 @@
 import React, { FormEvent, useRef, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 import { Form, Stack, Row, Col, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import CreatableReactSelect from "react-select/creatable";
-import { NoteData, Tag } from "../App";
+import { NoteData, Tag } from "../types";
 
 type NoteFormProps = {
   onSubmit: (data: NoteData) => void;
+  onAddTag: (tag: Tag) => void;
+  availableTags: Tag[];
 };
 
-const NoteForm = ({ onSubmit }: NoteFormProps) => {
+const NoteForm = ({ onSubmit, onAddTag, availableTags }: NoteFormProps) => {
   const titleRef = useRef<HTMLInputElement>(null);
   const markdownRef = useRef<HTMLTextAreaElement>(null);
   const [selectedTags, setSelectedTags] = useState<Tag[]>([]);
+  const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -19,21 +23,23 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
     onSubmit({
       title: titleRef.current!.value,
       markdown: markdownRef.current!.value,
-      tags: [],
+      tags: selectedTags,
     });
+
+    navigate("..");
   };
 
   return (
     <Form onSubmit={handleSubmit}>
       <Stack gap={4}>
         <Row>
-          <Col>
+          <Col style={{ minWidth: "300px" }}>
             <Form.Group controlId="title">
               <Form.Label>Title</Form.Label>
               <Form.Control ref={titleRef} required />
             </Form.Group>
           </Col>
-          <Col>
+          <Col style={{ minWidth: "300px" }}>
             <Form.Group controlId="tags">
               <Form.Label>Tags</Form.Label>
               <CreatableReactSelect
@@ -41,6 +47,15 @@ const NoteForm = ({ onSubmit }: NoteFormProps) => {
                   label: tag.label,
                   value: tag.id,
                 }))}
+                options={availableTags.map((tag) => ({
+                  label: tag.label,
+                  value: tag.id,
+                }))}
+                onCreateOption={(label) => {
+                  const newTag = { id: uuidv4(), label };
+                  onAddTag(newTag);
+                  setSelectedTags((prev) => [...prev, newTag]);
+                }}
                 onChange={(tags) =>
                   setSelectedTags(
                     tags.map((tag) => ({ label: tag.label, id: tag.value }))
