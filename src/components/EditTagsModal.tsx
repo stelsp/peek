@@ -37,7 +37,7 @@ const EditTagsModal = ({
                 <Col xs="auto">
                   <Button
                     onClick={() => onDeleteTag(tag.id)}
-                    variant="outlined-danger"
+                    variant="outline-danger"
                   >
                     &times;
                   </Button>
