@@ -55,8 +55,26 @@ const App = () => {
     });
   };
 
-  const addTag = (tag: Tag) => {
+  const onAddTag = (tag: Tag) => {
     setTags((prev) => [...prev, tag]);
+  };
+
+  const onUpdateTag = (id: string, label: string) => {
+    setTags((prevTags) => {
+      return prevTags.map((tag) => {
+        if (tag.id === id) {
+          return { ...tag, label };
+        } else {
+          return tag;
+        }
+      });
+    });
+  };
+
+  const onDeleteTag = (id: string) => {
+    setTags((prevTags) => {
+      return prevTags.filter((tag) => tag.id !== id);
+    });
   };
 
   return (
@@ -64,14 +82,21 @@ const App = () => {
       <Routes>
         <Route
           path="/"
-          element={<NoteList availableTags={tags} notes={notesWithTags} />}
+          element={
+            <NoteList
+              availableTags={tags}
+              notes={notesWithTags}
+              onUpdateTag={onUpdateTag}
+              onDeleteTag={onDeleteTag}
+            />
+          }
         />
         <Route
           path="/new"
           element={
             <NewNote
               onSubmit={onCreateNote}
-              onAddTag={addTag}
+              onAddTag={onAddTag}
               availableTags={tags}
             />
           }
@@ -83,7 +108,7 @@ const App = () => {
             element={
               <EditNote
                 onSubmit={onUpdateNote}
-                onAddTag={addTag}
+                onAddTag={onAddTag}
                 availableTags={tags}
               />
             }
