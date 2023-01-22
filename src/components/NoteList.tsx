@@ -62,7 +62,7 @@ const NoteList = ({
         <Row className="mb-4" xs={1} sm={2}>
           <Col>
             <Form.Group controlId="title">
-              <Form.Label>Title</Form.Label>
+              <Form.Label>Search</Form.Label>
               <Form.Control
                 type="text"
                 value={title}
